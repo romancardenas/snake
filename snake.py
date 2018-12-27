@@ -16,9 +16,9 @@ class Snake:
         self.direction = new_direction
 
     def fill_scenario(self, scenario):
-        scenario[scenario == 'AS'] = 'E'
-        scenario[scenario == 'DS'] = 'E'
-        state = 'AS' if self.alive else 'DS'
+        scenario[scenario == 'A'] = 'E'
+        scenario[scenario == 'D'] = 'E'
+        state = 'A' if self.alive else 'D'
         for x, y in self.position:
             scenario[x, y] = state
         return scenario
@@ -40,21 +40,20 @@ class Snake:
 if __name__ == '__main__':
     snake = Snake()
     sense = SenseHat()
-    scenario = np.full((8, 8), 'E', type=str)
+    scenario = np.full((8, 8), 'E', dtype=str)
     while True:
         for event in sense.stick.get_events():
             if event.action in ('pressed', 'held'):
                 if event.direction in ('right', 'left', 'up', 'down'):
                     snake.change_direction(event.direction)
         scenario = snake.move(scenario)
-        sense.clear()
-        for i in scenario.shape[0]:
-            for j in scenario.shape[1]:
+        for i in range(scenario.shape[0]):
+            for j in range(scenario.shape[1]):
                 red, green, blue = (0, 0, 0)
                 dot = scenario[i, j]
-                if dot == 'AS':
+                if dot == 'A':
                     red, green, blue = (255, 255, 255)
-                elif dot == 'DS':
+                elif dot == 'D':
                     red = 255
                 sense.set_pixel(i, j, red, green, blue)
         sleep(1)
