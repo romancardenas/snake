@@ -2,6 +2,7 @@ import numpy as np
 from random import randint
 from snake import Snake
 from time import sleep
+from sense_hat import SenseHat
 
 
 def display_scenario(sense, scenario):
@@ -22,8 +23,8 @@ def add_food(scenario):
     if np.sum(np.sum(scenario == 'F', axis=1), axis=0) == 0:
         x, y = scenario.shape
         while True:
-            i = randint(0, x)
-            j = randint(0, y)
+            i = randint(0, x - 1)
+            j = randint(0, y - 1)
             if scenario[i, j] == 'E':
                 scenario[i, j] = 'F'
                 break
