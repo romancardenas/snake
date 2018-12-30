@@ -1,5 +1,4 @@
 import numpy as np
-from random import randint
 from scenario import Scenario
 from item import Item
 from food import Food
@@ -32,15 +31,15 @@ if __name__ == '__main__':
 
     scenario = Scenario(8, 8)
     game = Item(scenario=scenario)
-    snake = Snake(position=[(1, 1), (1, 2), (1, 3)], scenario=scenario)
+    snake = Snake()
     food = Food()
     i = 0
     while True:
-        for event in sense.stick.get_events():
-            if event.action in ('pressed', 'held'):
-                if event.direction in ('right', 'left', 'up', 'down'):
-                    snake.change_direction(event.direction)
         display_scenario(sense, scenario.scenario)
         sleep(time_to_wait[i] / 1000.0)
         i = snake.run() - 1
         food.run()
+        for event in sense.stick.get_events():
+            if event.action in ('pressed', 'held'):
+                if event.direction in ('right', 'left', 'up', 'down'):
+                    snake.change_direction(event.direction)

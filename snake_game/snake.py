@@ -11,7 +11,10 @@ class Snake(Item):
         return len(self.position) == len(set(self.position))
     
     def change_direction(self, new_direction):
-        self.direction = new_direction
+        if (new_direction == 'right' or new_direction == 'left') and (self.direction == 'up' or self.direction == 'down'):
+            self.direction = new_direction
+        elif (self.direction == 'right' or self.direction == 'left') and (new_direction == 'up' or new_direction == 'down'):
+            self.direction = new_direction
 
     def empty_scenario(self):
         for x, y in self.position:
