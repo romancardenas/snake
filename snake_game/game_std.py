@@ -35,11 +35,11 @@ if __name__ == '__main__':
     food = Food()
     i = 0
     while True:
-        display_scenario(sense, scenario.scenario)
-        sleep(time_to_wait[i] / 1000.0)
-        i = snake.run() - 1
-        food.run()
         for event in sense.stick.get_events():
             if event.action in ('pressed', 'held'):
                 if event.direction in ('right', 'left', 'up', 'down'):
                     snake.change_direction(event.direction)
+        i = snake.run() - 1
+        food.run()
+        display_scenario(sense, scenario.scenario)
+        sleep(time_to_wait[i] / 1000.0)
