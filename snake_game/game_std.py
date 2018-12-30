@@ -25,6 +25,16 @@ def display_scenario(sense, scenario):
             sense.set_pixel(i, j, red, green, blue)
 
 
+def change_direction(sense, snake):
+    direction = None
+    for event in sense.stick.get_events():
+        if event.action in ('pressed', 'held'):
+            if event.direction in ('right', 'left', 'up', 'down'):
+                direction = event.direction
+    if direction is not None:
+        snake.change_direction(direction)
+
+
 if __name__ == '__main__':
     sense = SenseHat()
     time_to_wait = np.linspace(1000, 0, 64).astype(int).tolist()
@@ -35,11 +45,8 @@ if __name__ == '__main__':
     food = Food()
     i = 0
     while True:
-        for event in sense.stick.get_events():
-            if event.action in ('pressed', 'held'):
-                if event.direction in ('right', 'left', 'up', 'down'):
-                    snake.change_direction(event.direction)
-        i = snake.run() - 1
+        change_direction(sense, snake)
+        i = (snake.run() - 1) * 2
         food.run()
         display_scenario(sense, scenario.scenario)
         sleep(time_to_wait[i] / 1000.0)
