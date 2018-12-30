@@ -1,5 +1,5 @@
-from snake_game.item import Item
-from snake_game.scenario import Scenario
+from item import Item
+from scenario import Scenario
 
 
 class Snake(Item):

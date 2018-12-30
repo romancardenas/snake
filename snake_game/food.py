@@ -1,7 +1,7 @@
 from random import randint
-from snake_game.item import Item
-from snake_game.snake import Snake
-from snake_game.scenario import Scenario
+from item import Item
+from snake import Snake
+from scenario import Scenario
 
 
 class Food(Item):

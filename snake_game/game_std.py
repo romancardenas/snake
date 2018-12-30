@@ -1,9 +1,9 @@
 import numpy as np
 from random import randint
-from snake_game.scenario import Scenario
-from snake_game.item import Item
-from snake_game.food import Food
-from snake_game.snake import Snake
+from scenario import Scenario
+from item import Item
+from food import Food
+from snake import Snake
 from time import sleep
 from sense_hat import SenseHat
 
@@ -40,7 +40,7 @@ if __name__ == '__main__':
             if event.action in ('pressed', 'held'):
                 if event.direction in ('right', 'left', 'up', 'down'):
                     snake.change_direction(event.direction)
-        display_scenario(sense, scenario)
+        display_scenario(sense, scenario.scenario)
         sleep(time_to_wait[i] / 1000.0)
         i = snake.run() - 1
         food.run()
